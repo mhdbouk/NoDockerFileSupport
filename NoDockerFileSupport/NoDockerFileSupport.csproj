@@ -4,13 +4,26 @@
     <TargetFramework>net7.0</TargetFramework>
     <Nullable>enable</Nullable>
     <ImplicitUsings>enable</ImplicitUsings>
+
+    <PublishProfile>DefaultContainer</PublishProfile>
+    <ContainerBaseImage>mcr.microsoft.com/dotnet/aspnet:7.0</ContainerBaseImage>
+    <!--<ContainerRegistry>myregistry.com:1234</ContainerRegistry>-->
+    <ContainerImageTag>1.0.1-patch2</ContainerImageTag>
+    <!--<ContainerImageTags>1.0.1-patch2;latest</ContainerImageTags>-->
+
   </PropertyGroup>
+
+  <ItemGroup>
+      <ContainerPort Include="80" Type="tcp" />
+      <ContainerEnvironmentVariable Include="MyVariable" Value="MyValue" />
+  </ItemGroup>
 
   <PropertyGroup Condition=" '$(RunConfiguration)' == 'https' " />
   <PropertyGroup Condition=" '$(RunConfiguration)' == 'http' " />
   <ItemGroup>
     <PackageReference Include="Microsoft.AspNetCore.OpenApi" Version="7.0.0" />
     <PackageReference Include="Swashbuckle.AspNetCore" Version="6.4.0" />
+    <PackageReference Include="Microsoft.NET.Build.Containers" Version="0.2.7" />
   </ItemGroup>
 
 </Project>
